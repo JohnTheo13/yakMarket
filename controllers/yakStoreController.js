@@ -8,10 +8,11 @@ exports.upload = (req, res) => {
 };
 
 exports.getYaks = async (req, res) => {
-  const yaks = await Yak
-                      .find();
-  
-  const sum = milkStok(yaks, req.params.days)
+  const { params: { days } } = req;
+  let yaks = await Yak.getYaks(days);
+
+  console.log(sum);
+  console.log(yaks);
   
   res.render('./yaks');
 }
