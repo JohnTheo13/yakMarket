@@ -12,6 +12,5 @@ exports.milkStok = (yaks, days) => {
       sum += yak.milkPer(day);
     });
   }
-  console.log(sum);
   return sum;
 }

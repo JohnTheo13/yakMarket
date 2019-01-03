@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+  form(name="login-user"
+    class="card"
+    action="/login/user"
+    method="POST")
+    label(for="username") Username
+    input(type="text" name="username" required)
+    label(for="password") Password
+    input(type="password" name="password" required)
+    input.button(type="submit" value="Login")

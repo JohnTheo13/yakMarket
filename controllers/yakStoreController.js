@@ -4,17 +4,27 @@ const readline = require('readline');
 const { mockYaks, milkStok } = require('./helpers');
 
 exports.upload = (req, res) => {
-  res.render('./upload');
+  const { locals: { userIsAdmin } } = res;
+  if(userIsAdmin) {
+    res.render('./upload');
+  } else {
+    res.send('Not found');
+  }
 };
 
 exports.getYaks = async (req, res) => {
   const { params: { days } } = req;
   let yaks = await Yak.getYaks(days);
-
-  console.log(sum);
   console.log(yaks);
-  
   res.render('./yaks');
+}
+
+exports.getStock = async (req, res) => {
+  const { params: { days } } = req;
+  const yaks = await Yak.find();
+  const milk = milkStok(yaks, days);
+  console.log(milk);
+  res.render('./stock')
 }
 
 exports.save = async (req, res) => {
@@ -26,7 +36,7 @@ exports.save = async (req, res) => {
   //    return yak
   //    yaks.push(yak)
   // })
-  // Note: Empty database is exists
+  // Note: Empty database if exists
   Yak.remove({}, err => {
     if (err) {
       console.error(err)
@@ -37,7 +47,7 @@ exports.save = async (req, res) => {
       if(err) {
         return console.error(err);
       }
-      res.redirect('/stores')
+      res.redirect('/yaks')
     })
   })
 };

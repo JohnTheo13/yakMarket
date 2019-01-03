@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+  form(name="register-user"
+    class="card"
+    action="/register/user"
+    method="POST")
+    label(for="username") Username
+    input(type="text" name="username" required)
+    label(for="email") Email
+    input(type="email" name="email" required)
+    label(for="password") Password
+    input(type="password" name="password" required)
+    label(for="paswordConfirm") Confim
+    input(type="password" name="passwordConfirm" required)
+    input.button(type="submit")

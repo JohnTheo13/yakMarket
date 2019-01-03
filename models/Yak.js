@@ -34,7 +34,7 @@ yakSchema.methods.ageLastShaved = function(day) {
   return this.ageInDays(day) - 8
 }
 
-yakSchema.statics.getYaks = async function(days)  {
+yakSchema.statics.getYaks = async function(days)  { // for yaks overview not stock's
   const yaks = await this.find();
   yaks.map(yak => yak.age = (yak.age * 100 + Number(days)) / 100)
   return [...yaks];
