@@ -15,16 +15,15 @@ exports.upload = (req, res) => {
 exports.getYaks = async (req, res) => {
   const { params: { days } } = req;
   let yaks = await Yak.getYaks(days);
-  console.log(yaks);
-  res.render('./yaks');
+  res.render('./yaks', { yaks });
 }
 
 exports.getStock = async (req, res) => {
   const { params: { days } } = req;
   const yaks = await Yak.find();
-  const milk = milkStok(yaks, days);
+  const milk = milkStok(yaks, days).toFixed(2);
   console.log(milk);
-  res.render('./stock')
+  res.render('./stock', { milk })
 }
 
 exports.save = async (req, res) => {
